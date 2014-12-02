@@ -11,8 +11,8 @@ ECE382_Lab7
 ## Overview
 * Interface analog systems with digitial systems
 * Learn how to use the ADC (analog-to-digital converter) for the MSP430.
-* * Three pairs of IR emitters and detectors on the robot
-* * Use these pairs to detect if the robot is approaching a wall in the front or the sides.
+*  * Three pairs of IR emitters and detectors on the robot
+*  * Use these pairs to detect if the robot is approaching a wall in the front or the sides.
 
 ### Functionality
 #### Required Functionality
@@ -37,22 +37,22 @@ Testing the sensors with a DMM:
 
 Setting up the ADC10 subsystem:
 * registers I will use:
-* * ...
+*  * ...
 * the bits will I use from those registers:
-* * ...
+*  * ...
 * initialization sequence:
 
 Hardware interface:
 * the ADC10 channels I will use:
-* * ...
+*  * ...
 * the pins corresponding to those channels:
-* * ...
+*  * ...
 
 Interface for the sensors:
 * to use block or to use interrupts?
-* * ...
+*  * ...
 * to convert one sensor at a time or multiple at a time?
-* * ...
+*  * ...
 
 ## Lab
 
