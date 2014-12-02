@@ -33,6 +33,26 @@ ECE382_Lab7
 * Use these values to determine how the IR sensors work so you can properly use them to solve the maze.
 
 ## Prelab
+Testing the sensors with a DMM:
+
+Setting up the ADC10 subsystem:
+* registers I will use:
+* * ...
+* the bits will I use from those registers:
+* * ...
+* initialization sequence:
+
+Hardware interface:
+* the ADC10 channels I will use:
+* * ...
+* the pins corresponding to those channels:
+* * ...
+
+Interface for the sensors:
+* to use block or to use interrupts?
+* * ...
+* to convert one sensor at a time or multiple at a time?
+* * ...
 
 ## Lab
 
