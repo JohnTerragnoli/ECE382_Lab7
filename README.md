@@ -43,12 +43,65 @@ Testing the sensors with a DMM:
 | CENTER | 2.85 V | 1.10 V | 0.74 V |
 | RIGHT | 1.74 V | 1.07 V | 0.91 V |
 
-Setting up the ADC10 subsystem:
+Setting up the ADC10 Subsystem:
 * registers I will use:
-  * ...
+  * `P1DIR`: sets the LED to an output
+  * `P1OUT`: toggles the LED ON and OFF
+  * `ADC10CTL0`: turns the ADC ON and OFF; sets Vcc and Vss references
+  * `ADC10CTL1`: determines the channel
+  * `ADC10AE0`: determines analog input for desired pin
+  * `ADC10SC`: starts conversion process
+  * `ADC10BUSY`: signals busy while converting
+  * `ADC10MEM`: holds the 10-bit value
 * the bits will I use from those registers:
-  * ...
-* initialization sequence:
+  * I will use bits 3, 4, and 5 which correspond to the left, center, and right sensors, respectively.
+
+| BIT | Sensor |
+|:-:|:-:|
+| BIT 3 | LEFT |
+| BIT 4 | CENTER |
+| BIT 5 | RIGHT |
+
+* Initialization Sequence:
+  * I will be doing something similar to what Dr. Coulston did in `lab7.c`
+  * Here is my pseudo-code/code-outline:
+```
+// turn off the ADC subsystem at the very beginning (control register 0)
+// set the input channel and clock (control register 1)
+// set the left sensor's pin as an input (analog enable)
+// set the references, sample-hold times, turn on the ADC, enable conversion
+
+// start the conversion
+// wait for completion
+
+// collect the 10-bit sample
+// if the sample is greater than an arbitrarily decided voltage value, turn the LED ON
+// else turn the LED OFF
+
+// move onto the CENTER sensor and repeat above
+// move onto the RIGHT sensor and repeat above
+
+// end the while loop and start from the beginning
+```
+  
+  * Here is the initialization sequence for pin 4 (refer to `lab7. c'):
+```
+		// Configure P1.4 to be the ADC input
+		ADC10CTL0 = 0;                         // Turn off ADC subsystem
+		ADC10CTL1 = INCH_4 | ADC10DIV_3 ;      // Channel 4, ADC10CLK/4
+		ADC10AE0 = BIT4;                       // Make P1.4 analog input
+		ADC10CTL0 = SREF_0 | ADC10SHT_3 | ADC10ON | ENC;		// Vcc & Vss as reference
+
+		ADC10CTL0 |= ADC10SC;                  // Start a conversion
+		while(ADC10CTL1 & ADC10BUSY);          // Wait for conversion to complete
+		sample[i] = ADC10MEM;                  // collect that 10-bit value
+		if (sample[i] > 0x0200)	
+		  P1OUT |= BIT0;                       // toggle LED ON
+		else
+		  P1OUT &= ~BIT0;                      // toggle LED OFF
+		  
+	 // continue for pins 3 and 5 consecutively...
+```
 
 Hardware interface:
 * the ADC10 channels I will use:
