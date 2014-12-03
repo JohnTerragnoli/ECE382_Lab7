@@ -34,6 +34,14 @@ ECE382_Lab7
 
 ## Prelab
 Testing the sensors with a DMM:
+* I used a DMM to check the voltages for each sensor. After initial difficulty with the right sensor, I eventually was able to read decent voltage values when I put a piece of paper near the sensors. I double-checked that the sensors worked by using my camera. Through the camera lense, I identified the characteristic purple glow from the IR transmitter. 
+* Reference Values for the sensors
+
+| Sensor | 1 inch | 4 inches | 8 inches |
+|:-:|:-:|:-:|:-:|
+| LEFT | 2.85 V | 1.50 V | 1.20 V |
+| CENTER | 2.85 V | 1.10 V | 0.74 V |
+| RIGHT | 1.74 V | 1.07 V | 0.91 V |
 
 Setting up the ADC10 subsystem:
 * registers I will use:
@@ -57,5 +65,10 @@ Interface for the sensors:
 ## Lab
 
 ## Debugging
+### Prelab
+I connected the DMM to each of the sensors. The left and center sensors gave out reasonable voltages, but the right sensor did not detect any significant voltage value. To double check, I used my cell-phone's camera to see if the transmitters were actually transmitting IR signals. Lo and behold, the left and center transmitters glowed purple, but the right transmitter did not. As a result, I exchanged the right transmitter. I double-checked this new transmitter and found good voltage values and the characteristic purple glow from the camera.
+### Required Functionality
+### B Functionality
+### A Functionality
 
 ## Documentation
