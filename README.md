@@ -44,7 +44,7 @@ Testing the sensors with a DMM:
 | RIGHT | 1.74 V | 1.07 V | 0.91 V |
 
 Setting up the ADC10 Subsystem:
-* registers I will use:
+* The registers I will use:
   * `P1DIR`: sets the LED to an output
   * `P1OUT`: toggles the LED ON and OFF
   * `ADC10CTL0`: turns the ADC ON and OFF; sets Vcc and Vss references
@@ -53,7 +53,7 @@ Setting up the ADC10 Subsystem:
   * `ADC10SC`: starts conversion process
   * `ADC10BUSY`: signals busy while converting
   * `ADC10MEM`: holds the 10-bit value
-* the bits will I use from those registers:
+* The bits will I use from those registers:
   * I will use bits 3, 4, and 5 which correspond to the left, center, and right sensors, respectively.
 
 | BIT | Sensor |
@@ -84,7 +84,7 @@ Setting up the ADC10 Subsystem:
 	// end the while loop and start from the beginning
 ```
   
-  * Here is the initialization sequence for pin 4 (refer to `lab7. c'):
+  * Here is the initialization sequence for pin 4 (refer to `lab7. c`):
 ```
 	// Configure P1.4 to be the ADC input
 	ADC10CTL0 = 0				// Turn off ADC subsystem
@@ -104,18 +104,16 @@ Setting up the ADC10 Subsystem:
 ```
 
 Hardware interface:
-* the ADC10 channels I will use:
-  * ...
-* the pins corresponding to those channels:
-  * ...
+* The ADC10 channels I will use:
+  * I will use channels 3, 4, and 5. 
+* The pins corresponding to those channels:
+  * Intuitively, the channels I will use correspond with pins `P1.3`, `P1.4`, and `P1.5`.
 
 Interface for the sensors:
-* to use block or to use interrupts?
-  * ...
-* to convert one sensor at a time or multiple at a time?
-  * ...
+* I will use the sensors one at a time. In the while loop, I will start the conversion for the LEFT sensor, then immediately start the CENTER sensor, then the RIGHT sensor. The loop will then start again from the beginning. 
 
 ## Lab
+[in progress]
 
 ## Debugging
 ### Prelab
