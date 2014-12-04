@@ -4,7 +4,7 @@ ECE382_Lab7
 ## *Functionality Update*
 |Functionality|Status|Date Completed|Checked by|
 |:-:|:-:|:-:|:-:|
-| Required | in progress |  |  |
+| Required | Complete | 3 Dec 14 @ 1700 | ... |
 | B | in progress |  |  |
 | A | in progress |  |  |
 
@@ -113,13 +113,91 @@ Interface for the sensors:
 * I will use the sensors one at a time. In the while loop, I will start the conversion for the LEFT sensor, then immediately start the CENTER sensor, then the RIGHT sensor. The loop will then start again from the beginning. 
 
 ## Lab
-[in progress]
+### Required Functionality
+I started out by utilizing the same code from the prelab but for the other two pins as well (P1.3 and P1.5). As I mentioned in the prelab, I checked for the samples for each sensor consecutively in a while loop. I decided to implement a switch-case that would take in a parameter which will correspond to the LEFT, CENTER, and RIGHT sensors. 
+```
+switch(sensor) {
+	case LEFT:
+		ADC10CTL0 = 0;
+		ADC10CTL1 = INCH_3 | ADC10DIV_3 ;			// Channel 4, ADC10CLK/3
+		ADC10AE0 = BIT3;					// Make P1.3 analog input
+		ADC10CTL0 = SREF_0 | ADC10SHT_3 | ADC10ON | ENC;	// Vcc & Vss as reference
+		ADC10CTL0 |= ADC10SC;					// Start a conversion
+		while(ADC10CTL1 & ADC10BUSY);				// Wait for conversion to complete
+		sample3[i] = ADC10MEM;					// collect that 10-bit value
+
+		if (sample3[i] > 0x01FF)				// if the sample values are greater than a certain V
+			P1OUT |= BIT0;					// turn on LED
+		else
+			P1OUT &= ~BIT0;					// turn off LED
+			
+		i = (i+1) & 0xF;					// This is a mod 16 increment
+		
+		sensor = CENTER;					// move onto next case
+		break;		
+	case CENTER:
+		// same as above, but with different channel and pin
+		
+		sensor = RIGHT;
+		break;
+	case RIGHT:
+		// same as above, but with different channel and pin
+		
+		sensor = LEFT;
+		break;
+}
+```
+
+This code worked with the following arrays and index variables:
+```
+	unsigned short sample3[16];	// LEFT
+	unsigned short sample4[16];	// CENTER
+	unsigned short sample5[16];	// RIGHT
+	unsigned char i = 0;		// index into sample array
+```
+
+I then tried to create methods that would make the code better organized. I wanted to make methods for each sensor's sampling. I ran into problems with the scope of the sample arrays and the index. This made it difficult to check what values the sensors were taking in. I decided to abandon this approach and instead, get rid of the sampling arrays altogether. 
+
+I did create three methods which corresponds with the three sensors (left, center, and right). These methods pretty much hold the same code from above with the sampling and index portions excluded. Here is the method I used for the LEFT sensor:
+```
+void leftSensor() {
+	ADC10CTL0 = 0;						// turn off the ADC subsytem
+	ADC10CTL1 = INCH_3 | ADC10DIV_3 ;			// set input channel 3 and ADC10CLK/3
+	ADC10CTL0 = SREF_0 | ADC10SHT_3 | ADC10ON | ENC;	// Vcc & Vss as reference
+
+	ADC10CTL0 |= ADC10SC;					// Start a conversion
+	while(ADC10CTL1 & ADC10BUSY);				// Wait for conversion to complete
+
+	if (ADC10MEM > DETECTVALUE)				// if the sample values are greater than the detected voltage
+		RED_ON;						// red LED ON
+	else	
+		RED_OFF;					// red LED OFF
+}
+```
+
+You may notice that the method is missing the line of code that enables the analog inputs for each pin. Instead of calling this line in each method, I decided to simply put this line of code before the while() loop since it only had to run once.
+```
+	ADC10AE0 = BIT3 | BIT4 | BIT5;		// make P1.3, P1.4, and P1.5 analog inputs
+```
+
+My sensors worked as expected. When I placed a piece of paper on the left side of the robot, the RED LED lit up. Likewise, when I placed the piece of paper on the right side, the green LED lit up. Finally, when the paper was placed in front of the robot, both LEDs lit up. 
+
+**Required funcitonality achieved!**
+
+I noticed that the sensors were a little bit too sensitive. Thus, I changed the voltage detection value by increasing it slightly from 0x0200 to 0x0232.
+
+### B Functionality
+
+### A Functionality
 
 ## Debugging
-### Prelab
+#### Prelab [Debugging]
 I connected the DMM to each of the sensors. The left and center sensors gave out reasonable voltages, but the right sensor did not detect any significant voltage value. To double check, I used my cell-phone's camera to see if the transmitters were actually transmitting IR signals. Lo and behold, the left and center transmitters glowed purple, but the right transmitter did not. As a result, I exchanged the right transmitter. I double-checked this new transmitter and found good voltage values and the characteristic purple glow from the camera.
-### Required Functionality
-### B Functionality
-### A Functionality
+
+#### Required Functionality [Debugging]
+I had problems with reading in the sample data when I tried creating specific methods for sampling each sensor. The problem was due to the different scopes of the array variables. In the end, I decided against using these methods, and got rid of the sampling arrays altogether. Instead, I directly compared `ADC10MEM` to my voltage detector value (arbitrarily set). This ended up working well and still allowed me to compartamentalize my code into prettier methods.
+
+#### B Functionality [Debugging]
+#### A Functionality [Debugging]
 
 ## Documentation
