@@ -114,7 +114,9 @@ Interface for the sensors:
 
 ## Lab
 ### Required Functionality
-I started out by utilizing the same code from the prelab but for the other two pins as well (P1.3 and P1.5). As I mentioned in the prelab, I checked for the samples for each sensor consecutively in a while loop. I decided to implement a switch-case that would take in a parameter which will correspond to the LEFT, CENTER, and RIGHT sensors. 
+I began by double-checking the voltage signals for each of my sensors. With the sensors connected to the 5 V source, I was receiving a maximun voltage of about 2.5 V. Because of this, I decided that I did not need to convert the 5 V into 3.3 V just for the MSP430.
+
+I utilized the same code from the prelab but for the other two pins as well (P1.3 and P1.5). As I mentioned in the prelab, I checked for the samples for each sensor consecutively in a while loop. I decided to implement a switch-case that would take in a parameter which will correspond to the LEFT, CENTER, and RIGHT sensors. 
 ```
 switch(sensor) {
 	case LEFT:
