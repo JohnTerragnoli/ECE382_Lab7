@@ -32,8 +32,6 @@ ECE382_Lab7
 * This table/graph must be generated for each IR sensor. 
 * Use these values to determine how the IR sensors work so you can properly use them to solve the maze.
 
-![alt test](https://github.com/sabinpark/ECE382_Lab7/blob/master/images/sensor_characterization.PNG "sensor voltage characterization")
-
 ## Prelab
 Testing the sensors with a DMM:
 * I used a DMM to check the voltages for each sensor. After initial difficulty with the right sensor, I eventually was able to read decent voltage values when I put a piece of paper near the sensors. I double-checked that the sensors worked by using my camera. Through the camera lense, I identified the characteristic purple glow from the IR transmitter. 
@@ -192,7 +190,11 @@ I noticed that the sensors were a little bit too sensitive. Thus, I changed the 
 
 ### B Functionality
 
+[code added in code folder]
+
 ### A Functionality
+
+![alt test](https://github.com/sabinpark/ECE382_Lab7/blob/master/images/sensor_characterization.PNG "sensor voltage characterization")
 
 ## Debugging
 #### Prelab [Debugging]
