@@ -4,8 +4,8 @@ ECE382_Lab7
 ## *Functionality Update*
 |Functionality|Status|Date Completed|Checked by|
 |:-:|:-:|:-:|:-:|
-| Required | Complete | 3 Dec 14 @ 1700 | ... |
-| B | in progress |  |  |
+| Required | Complete | 3 Dec 14 @ 1700 | Dr. Coulston |
+| B | Complete | 3 Dec 14 @ 1700 | Dr. Coulston |
 | A | in progress |  |  |
 
 ## Overview
