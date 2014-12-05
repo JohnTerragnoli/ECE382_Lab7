@@ -6,7 +6,7 @@ ECE382_Lab7
 |:-:|:-:|:-:|:-:|
 | Required | Complete | 3 Dec 14 @ 1700 | Dr. Coulston |
 | B | Complete | 3 Dec 14 @ 1700 | Dr. Coulston |
-| A | in progress |  |  |
+| A | Complete | 5 Dec 14 @ 1630 | N/A |
 
 ## Overview
 * Interface analog systems with digitial systems
