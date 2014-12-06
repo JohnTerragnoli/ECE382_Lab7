@@ -17,20 +17,20 @@ ECE382_Lab7
 ### Functionality
 #### Required Functionality
 * Use the ADC subsystem to light LEDs based on the presence of a wall.
-* The presence of a wall next to the left sensor should light LED1 on your Launchpad board. 
-* The presence of a wall next to the right sensor should light LED2 on your Launchpad board. 
+* The presence of a wall next to the left sensor should light LED1 on the Launchpad board. 
+* The presence of a wall next to the right sensor should light LED2 on the Launchpad board. 
 * Demonstrate that the LEDs do not light until they come into close proximity with a wall.
 
 #### B Functionality
-* Create a standalone library for your ATD code and release it on Github. 
-* This should be separate from your lab code. 
+* Create a standalone library for my ATD code and release it on Github. 
+* This should be separate from my lab code. 
 * It should have a thoughtful interface and README, capable of being reused in the robot maze laboratory.
 
 #### A Functionality
-* Since each robot's sensors are a little bit different, you need to fully characterize the sensor for your robot. 
+* Since each robot's sensors are a little bit different, I need to fully characterize the sensors for my robot. 
 * Create a table and graphical plot that shows the ATD values for a variety of distances from a maze wall. 
 * This table/graph must be generated for each IR sensor. 
-* Use these values to determine how the IR sensors work so you can properly use them to solve the maze.
+* Use these values to determine how the IR sensors work so I can properly use them to solve the maze.
 
 ## Prelab
 Testing the sensors with a DMM:
@@ -184,17 +184,39 @@ You may notice that the method is missing the line of code that enables the anal
 
 My sensors worked as expected. When I placed a piece of paper on the left side of the robot, the RED LED lit up. Likewise, when I placed the piece of paper on the right side, the green LED lit up. Finally, when the paper was placed in front of the robot, both LEDs lit up. 
 
-**Required funcitonality achieved!**
+**Required functionality achieved!**
 
 I noticed that the sensors were a little bit too sensitive. Thus, I changed the voltage detection value by increasing it slightly from 0x0200 to 0x0232.
 
 ### B Functionality
+For B functionality, all I did was create an implementation file (`16_lab7_imp.c`) and a library file (`robot.h)`. Within the library file, I defined various constants and created function prototypes. In the implementation, I put in all of my methods excluding main().
 
-[code added in code folder]
+Specifically, I added three methods; one for each sensor. As you may guess, these methods are the ones I described earlier in the Required Functionality section.
+
+Overall, by separating my code into distinct files made my code more eligible and easier to debug.
+
+**B functionality achieved!**
 
 ### A Functionality
+To get A functionality, I needed to characterize the various sensor values at different wall distances. I used a DMM (digital multimeter), a 12-inch ruler, and one of the robot mazes. I decided to measure the output voltages of the receiver for 4 different distances from the wall for each sensor. These four distances are: 1 inch, 2 inches, 4 inches, and 8 inches.
+
+I started with the left sensor. Using the ruler, I ensured the sensor was perpendicular to the face of the wall at a distance of 1 inch. I took two more measurements using two different walls of the robot maze. I did this purposely to account for the different lighting throughout the maze. 
+
+To get the best measurements, I realized that I should step a few feet away from the robot during measurements in order to minimize the effects from my shadows onto the IR receiver. Surprisingly, I was able to get good voltage which were all pretty close to each other's values.
+
+With three measurements for each of the four distances, I was able to calculate decent averages. I then characterized the rest of the sensors as shown below:
 
 ![alt test](https://github.com/sabinpark/ECE382_Lab7/blob/master/images/sensor_characterization.PNG "sensor voltage characterization")
+
+Here is a graphical display of these voltages.
+
+![alt test](https://github.com/sabinpark/ECE382_Lab7/blob/master/images/sensor_graph.PNG "sensor graph")
+
+Since I wanted my threshold voltage to trigger a certain response with some consistency, I knew there had to be a range of HEX values that did not overlap with other threshold values and was still big enough for my needs. As shown in the last four columns above, I found the min and max range of the threshold voltages. I found these values by dividing the difference between adjacent DEC values by 2. This difference was then added to a certain value to get the max, and subtracted from that value to get the min. The next threshold voltage's max would therefore be equal to the current threshold voltage's min - 1. Theoretically, at least, this should work for making my robot do various things. We shall find out in lab 8 whether this works as well as I wanted.
+
+**A functionality achieved!**
+
+After talking to Dr. York, I realized that there are other methods of finding good IR sensor characterizations. Currently, I am only measuring the output voltage of each sensor for various distances from walls. However, these are only theoretical values, and I cannot simply assume that these voltage readings perfectly match the threshold voltages I use in my code to properly toggle the LEDs. Thus, I will consider utilizing some different methods to get better IR sensor characterizations. 
 
 IDEAS:
 * set an arbitrary HEX value and then move the robot away from the wall until the sensor turns on the LED
@@ -215,7 +237,16 @@ I connected the DMM to each of the sensors. The left and center sensors gave out
 #### Required Functionality [Debugging]
 I had problems with reading in the sample data when I tried creating specific methods for sampling each sensor. The problem was due to the different scopes of the array variables. In the end, I decided against using these methods, and got rid of the sampling arrays altogether. Instead, I directly compared `ADC10MEM` to my voltage detector value (arbitrarily set). This ended up working well and still allowed me to compartamentalize my code into prettier methods.
 
+Another problem I had was that some of the sensors produced very weak output voltages. I discovered that by adjusting the direction of the IR transmitter and receiver, I could receive much greater (or less, if I wanted) voltage values. The greatest voltage values corresponded to the when transmitter and receiver were parallel.
+
 #### B Functionality [Debugging]
+None.
+
 #### A Functionality [Debugging]
+When I first started to measure the voltages for each sensor, I noticed that the voltage values displayed on the DMM was very erratic. I soon discovered that I should place the robot and DMM on the maze, then make sure I was a few feet away. This helped to keep the lighting (shadows) around the robot more constant, effectively allowing the DMM values to be more constant as well. 
 
 ## Documentation
+* Prelab: I used the code provided by Dr. Coulston to utilize one of the sensors. Using this code, I was able to read the two other sensors as well.
+* Required Functionality: None.
+* B Functionality: None.
+* A Functionality: Dr. York gave me various ideas on accurately configuring the sensors with corresponding voltages and hexadecimal values used in the code.  
