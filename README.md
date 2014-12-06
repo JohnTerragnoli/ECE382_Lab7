@@ -196,6 +196,18 @@ I noticed that the sensors were a little bit too sensitive. Thus, I changed the 
 
 ![alt test](https://github.com/sabinpark/ECE382_Lab7/blob/master/images/sensor_characterization.PNG "sensor voltage characterization")
 
+IDEAS:
+* set an arbitrary HEX value and then move the robot away from the wall until the sensor turns on the LED
+  * measure that distance
+  * do it for each sensor, but perhaps only for one distance characterization
+  * try to get it to be around 2 to 3 inches
+* consider what would happen if the motor starts running
+  * would that affect the voltage characterization?
+  * try testing out the robot with the sensors while the motors are running (set up on top of erasers)
+* is the voltage difference between just running the battery and running with the MSP430 hooked up different?
+  * It is...but is that difference a constant?
+  * Using the first idea, maybe I can compare the hex values and find what that constant it.
+
 ## Debugging
 #### Prelab [Debugging]
 I connected the DMM to each of the sensors. The left and center sensors gave out reasonable voltages, but the right sensor did not detect any significant voltage value. To double check, I used my cell-phone's camera to see if the transmitters were actually transmitting IR signals. Lo and behold, the left and center transmitters glowed purple, but the right transmitter did not. As a result, I exchanged the right transmitter. I double-checked this new transmitter and found good voltage values and the characteristic purple glow from the camera.
