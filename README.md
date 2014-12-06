@@ -208,7 +208,7 @@ With three measurements for each of the four distances, I was able to calculate 
 
 ![alt test](https://github.com/sabinpark/ECE382_Lab7/blob/master/images/sensor_characterization.PNG "sensor voltage characterization")
 
-Here is a graphical display of these voltages.
+Here is a graphical display of these voltages. I used a best-fit power curve. It turns out that the power curve does match the data well with the high R squared values.
 
 ![alt test](https://github.com/sabinpark/ECE382_Lab7/blob/master/images/sensor_graph.PNG "sensor graph")
 
